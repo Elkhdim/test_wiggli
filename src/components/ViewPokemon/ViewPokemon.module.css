@@ -1,0 +1,42 @@
+table {
+    width: 100%;
+    border: 1px solid;
+}
+
+td,tr {
+    border: 1px solid;
+    text-align: center;
+    font-size: 15px;
+}
+
+img {
+    height: 700%;
+    width: 70%;
+}
+.bd{
+  min-height: 438px;
+}
+.btn {
+    text-decoration: none;
+    padding: 5px;
+    border: solid 1px;
+    width: 50px;
+
+
+  }
+  
+  .btn:link,
+  .btn:visited {
+    color: blue;
+  }
+  
+  .btn:hover {
+    color: red;
+  }
+  .typePok {
+    width:100%;
+    padding: 10px;
+    margin-top: 1px;
+    display: flex;
+
+  }

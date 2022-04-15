@@ -1,0 +1,39 @@
+.container {
+    margin: 0 auto;
+    max-width: 68rem;
+    width: 90%;
+    height: 100%;
+  }
+  .body{
+    height: 100%;
+  }
+
+  .btn {
+    text-decoration: none;
+    padding: 5px;
+    border: solid 1px;
+    width: 50px;
+
+
+  }
+  
+  .btn:link,
+  .btn:visited {
+    color: blue;
+  }
+  
+  .btn:hover {
+    color: red;
+  }
+  .typePok {
+    width:100%;
+    padding: 10px;
+    margin-top: 1px;
+    display: flex;
+
+  }
+
+  .blogHeader {
+    width: 100%;
+    background-color: blue;
+  }

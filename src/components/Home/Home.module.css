@@ -1,0 +1,57 @@
+body {
+  font: 600 14px/24px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light",
+    "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Sans-Serif;
+}
+h1 {
+  color: #9799a7;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+button {
+    background-color: azure;
+    padding: 5px 10px 5px 10px;
+    margin: 5px 10px 5px 10px;
+    width: 150px;
+    border-radius: 5px;
+}
+.flexContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  border-bottom: 1px solid;
+  justify-content: space-between;
+}
+.flexContainer > div {
+  margin: 10px;
+  line-height: 45px;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 5px;
+  border: solid 1px;
+}
+
+.btn:link,
+.btn:visited {
+  color: blue;
+}
+
+.btn:hover {
+  color: red;
+}
+
+.pagination {
+  text-align: center;
+
+}
+.inp {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  
+}
+.container {
+  min-height: 438px;
+}

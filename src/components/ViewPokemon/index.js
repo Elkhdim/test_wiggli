@@ -6,9 +6,7 @@ import styles from "./ViewPokemon.module.css";
 function ViewPokemon() {
   const { name } = useParams();
   const [pokemonInf, setPokemonInf] = useState([]);
-  const [can_evolve, setCan_evolve] = useState([]);
   const [pok_ev, setPok_ev] = useState([]);
-
   const pokemonInfo = () => {
     return axios
       .get(`https://pokeapi.co/api/v2/pokemon/${name}`)
@@ -21,24 +19,56 @@ function ViewPokemon() {
       .get(`https://pokeapi.co/api/v2/pokemon-species/${name}`)
       .then((res) => {
         axios.get(`${res.data.evolution_chain.url}`).then((response) => {
-          setPok_ev([
-            response.data.chain.species.name,
-            response.data.chain.evolves_to[0].species.name,
-            response.data.chain.evolves_to[0].evolves_to[0].species.name,
-          ]);
+          if (
+            response.data.chain.evolves_to.length > 0 &&
+            response.data.chain.evolves_to[0].evolves_to.length > 0
+          ) {
+            setPok_ev([
+              response.data.chain.species.name,
+              response.data.chain.evolves_to[0].species.name,
+              response.data.chain.evolves_to[0].evolves_to[0].species.name,
+            ]);
+          } else if (
+            response.data.chain.evolves_to.length > 0 &&
+            response.data.chain.evolves_to[0].evolves_to.length === 0
+          ) {
+            setPok_ev([
+              response.data.chain.species.name,
+              response.data.chain.evolves_to[0].species.name,
+            ]);
+          }
         });
-        setCan_evolve(res.data.evolution_chain.url);
       });
   };
-
+  let list_evolve = [];
   useEffect(() => {
     pokemonInfo();
     can_evovle_pok();
-  }, []);
+  }, [name]);
   function getTypeId(url) {
     var matches = url.match(/\d+/g);
     return matches[matches.length - 1];
   }
+
+  const list_Pok_Family = pok_ev.map((item, ind, elements) => {
+    if (item === name) {
+      var nextPok = elements[ind + 1];
+      if (nextPok === pok_ev[pok_ev.length]) {
+        return <p>Last evolution</p>;
+      } else {
+        return (
+          <p key={ind}>
+            <Link
+              className={styles.listPok}
+              to={{ pathname: `/viewPokemon/${nextPok}` }}
+            >
+              {nextPok}
+            </Link>
+          </p>
+        );
+      }
+    }
+  });
   const listPokInfo =
     pokemonInf.length === 0 ? (
       <h1>Loading..</h1>
@@ -48,7 +78,7 @@ function ViewPokemon() {
           <tr>
             <th>Name of pokemon</th>
             <th>Image</th>
-            <th>pokemon family</th>
+            <th>Next evolution</th>
 
             <th>Type</th>
           </tr>
@@ -62,11 +92,7 @@ function ViewPokemon() {
                 alt=""
               />
             </td>
-            <td>
-              <p>{pok_ev[0]}</p>
-              <p>{pok_ev[1]}</p>
-              <p>{pok_ev[2]}</p>
-            </td>
+            <td>{list_Pok_Family}</td>
             <td>
               {pokemonInf.data.types.map((item_type, index) => {
                 return (

@@ -5,8 +5,7 @@ import styles from "./Home.module.css";
 function Home() {
   const [pokemon, setPokemon] = useState([]);
   const [offset, setOffset] = useState(0);
-  const [searchInput, setSearchInput] = useState("");
-  const [filteredResults, setFilteredResults] = useState([]);
+
   const nextPage = () => {
     setOffset(offset + 20);
   };
@@ -20,51 +19,18 @@ function Home() {
         setPokemon(res);
       });
   };
-
-  const searchItems = (event) => {
-    setSearchInput(event);
-    if (searchInput.length > 0) {
-      const filterPok = pokemon.data.results.filter((item) => {
-        return Object.values(item)
-          .join("")
-          .toLowerCase()
-          .includes(searchInput.toLowerCase());
-      });
-      setFilteredResults(filterPok);
-    } else {
-      setFilteredResults(pokemon);
-    }
-  };
   useEffect(() => {
     allPokemon();
-    //searchItems();
-  }, [searchInput, offset]);
-
+  }, [offset]);
   const listPok =
     pokemon.length === 0 ? (
       <h1>Loading...</h1>
-    ) : searchInput.length > 1 ? (
-      filteredResults.map((item, ind) => {
-        return (
-          <div className={styles.flexContainer} key={ind}>
-            <div>{item.name} </div>
-            <div>
-              <Link
-                className={styles.btn}
-                to={{ pathname: `/viewPokemon/${item.name}` }}
-              >
-                View
-              </Link>
-            </div>
-          </div>
-        );
-      })
     ) : (
       pokemon.data.results.map((item, ind) => {
         return (
           <div className={styles.flexContainer} key={ind}>
             <div>{item.name} </div>
-            <div>
+            <div >
               <Link
                 className={styles.btn}
                 to={{ pathname: `/viewPokemon/${item.name}` }}
@@ -75,28 +41,18 @@ function Home() {
           </div>
         );
       })
+      
     );
 
-  const showButton =
-    pokemon.length === 0 ? (
-      <></>
-    ) : (
-      <div className={styles.pagination}>
-        <button onClick={prevPage}> Preview</button>
-        <button onClick={nextPage}>Next</button>
-      </div>
-    );
+    const showButton = pokemon.length === 0 ? <></> : <div className={styles.pagination}>
+    <button onClick={prevPage}> Preview</button>
+    <button onClick={nextPage}>Next</button>
+  </div>
   return (
-    <div className={styles.container}>
+    <div >
       <div>
-        <input
-          onChange={(ev) => searchItems(ev.target.value)}
-          placeholder="Search..."
-          className={styles.inp}
-          type="text"
-        />
-      </div>
-      <div>{listPok}</div>
+          {listPok}
+    </div>
       {showButton}
     </div>
   );

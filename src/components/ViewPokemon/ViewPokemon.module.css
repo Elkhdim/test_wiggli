@@ -40,3 +40,15 @@ img {
     display: flex;
 
   }
+  .listPok {
+    text-decoration: none;
+
+  }
+  .listPok:link,
+.listPok:visited {
+  color: blue;
+}
+.listPok:hover{
+  text-decoration: underline;
+  color: red;
+}

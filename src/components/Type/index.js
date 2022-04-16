@@ -33,7 +33,6 @@ function Type() {
     var matches = url.match(/\d+/g);
     return matches[matches.length - 1];
   }
-  console.log("type pok:", typePok);
   const showButton =
     typePok.length === 0 ? (
       <></>
@@ -60,10 +59,11 @@ function Type() {
         {pok_arr.map((item, index) => {
           return (
             <Link
+            key={index}
               className={styles.btn}
               to={{ pathname: `/viewPokemon/${item.pokemon.name}` }}
             >
-              <div key={index} className={styles.column}>
+              <div  className={styles.column}>
                 <div className={styles.card}>
                   <img
                     alt="Avatar"

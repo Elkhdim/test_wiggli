@@ -40,7 +40,6 @@ function ViewPokemon() {
         });
       });
   };
-  let list_evolve = [];
   useEffect(() => {
     pokemonInfo();
     can_evovle_pok();
@@ -54,7 +53,7 @@ function ViewPokemon() {
     if (item === name) {
       var nextPok = elements[ind + 1];
       if (nextPok === pok_ev[pok_ev.length]) {
-        return <p>Last evolution</p>;
+        return <p key={ind}>Last evolution</p>;
       } else {
         return (
           <p key={ind}>
@@ -112,6 +111,7 @@ function ViewPokemon() {
           </tr>
         </tbody>
       </table>
+      
     );
 
   return <div className={styles.bd}>{listPokInfo}</div>;
